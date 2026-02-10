@@ -1,0 +1,273 @@
+:root {
+  /* Base */
+  --bg: #ffffff;
+  --card: #fafafa;
+
+  /* Text */
+  --ink: #121212;
+  --ink-soft: #1e1e1e;
+  --muted: #8a8a8a;
+
+  /* Accent (Pink) */
+  --accent: #cd9191;
+
+  /* Stroke */
+  --stroke: rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Pretendard, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 36px 12px 48px;
+}
+
+/* =====================
+   Main Section
+===================== */
+.main-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 30px;
+  padding: 12px 0 24px;
+}
+
+.name {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.intro-text {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.main-links {
+  display: flex;
+  gap: 14px;
+  margin-top: 0;
+}
+
+.main-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+
+  padding: 2px 0;
+  transition:
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.main-links a:hover {
+  color: var(--accent);
+  box-shadow: inset 0 -1px 0 var(--accent);
+}
+
+/* =====================
+   Detail Section
+===================== */
+.detail-section {
+  padding-top: 48px;
+}
+
+/* Section Title */
+.detail-title {
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  padding-bottom: 6px;
+
+  background: linear-gradient(135deg, #cd9191 0%, #e7b6b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =====================
+   Technical Skills
+===================== */
+.skills-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 5px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: #757575;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+/* =====================
+   Background
+===================== */
+.background-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.background-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 20px 22px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  border: 1px solid var(--stroke);
+}
+
+.background-card,
+.project-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.background-card:hover,
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.background-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.background-detail {
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.background-period {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.background-card.is-planned {
+  opacity: 0.55;
+}
+
+.background-card .badge {
+  align-self: flex-start;
+}
+
+/* =====================
+   Projects
+===================== */
+.project-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.project-card {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 14px 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  border: 1px solid var(--stroke);
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.project-period {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* =====================
+   Badges (Glass Style)
+===================== */
+.role-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 5px;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 1px 2px rgba(30, 27, 22, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* =====================
+   Responsive
+===================== */
+@media (max-width: 640px) {
+  .page {
+    padding: 48px 16px 72px;
+  }
+
+  .name {
+    font-size: 34px;
+  }
+
+  .background-grid {
+    grid-template-columns: 1fr;
+  }
+}
