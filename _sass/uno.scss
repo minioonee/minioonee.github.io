@@ -1331,11 +1331,11 @@ body {
 }
 
 ::selection {
-  background: #fae3df;
+  background: #faf5ef;
 }
 
 ::-moz-selection {
-  background: #fae3df;
+  background: #faf5ef;
 }
 
 a {
@@ -1674,9 +1674,13 @@ hr {
 
 .panel-title {
   margin: 0 0 5px 0;
-  font-size: 2.5em;
-  letter-spacing: 4px;
-  color: #fff;
+  font-size: 1.9em;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-family:
+    "Montserrat", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
+    system-ui, sans-serif;
+  color: #757575;
 }
 
 .panel-subtitle {
@@ -1695,7 +1699,7 @@ hr {
   width: 100%;
   max-width: none;
   height: 100%;
-  background-color: #f1ece5;
+  background-color: #faf5ef;
   background-image: none;
 }
 
@@ -1722,6 +1726,9 @@ hr {
 
 .panel-cover__description {
   margin: 0 30px;
+  font-weight: 400;
+  text-shadow: none;
+  color: #757575;
 }
 
 .panel-cover__divider {
@@ -1768,11 +1775,11 @@ hr {
 .panel-inverted {
   font-weight: 100;
   text-align: center;
-  color: #fff;
+  color: #424242;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
 }
 .panel-inverted a {
-  color: #fff;
+  color: #424242;
 }
 
 .cover-navigation {
