@@ -87,12 +87,12 @@ body {
    Detail Section
 ===================== */
 .detail-section {
-  padding-top: 48px;
+  padding-top: 55px;
 }
 
 /* Section Title */
 .detail-title {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
