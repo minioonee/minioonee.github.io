@@ -1675,12 +1675,13 @@ hr {
 .panel-title {
   margin: 0 0 5px 0;
   font-size: 1.9em;
-  letter-spacing: -0.02em;
-  font-weight: 500;
+  letter-spacing: 0;
+  font-weight: 600;
   font-family:
-    "Montserrat", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
-    system-ui, sans-serif;
+    "Playfair Display", "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic",
+    system-ui, serif;
   color: #757575;
+  text-shadow: none;
 }
 
 .panel-subtitle {
@@ -1939,13 +1940,13 @@ nav {
 .navigation__item a {
   display: block;
   position: relative;
-  border-color: #fff;
-  color: #fff;
+  border-color: #b3aba1;
+  color: #b3aba1;
   opacity: 0.8;
 }
 .navigation__item a:hover {
-  color: #fff;
-  border-color: #fff;
+  color: #b3aba1;
+  border-color: #b3aba1;
   opacity: 1;
 }
 
