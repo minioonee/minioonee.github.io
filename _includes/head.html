@@ -70,8 +70,6 @@
     {{- site.title -}}
   </title>
 
-  {% include_cached favicons.html %}
-
   <!-- Resource Hints -->
   {% unless site.assets.self_host.enabled %}
     {% for hint in site.data.origin.cors.resource_hints %}
