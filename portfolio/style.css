@@ -169,6 +169,12 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+.background-title,
+.background-detail,
+.background-period {
+  margin-left: 5px;
+}
+
 .background-title {
   font-size: 16px;
   font-weight: 600;
@@ -190,6 +196,7 @@ body {
 
 .background-card .badge {
   align-self: flex-start;
+  margin-bottom: 5px;
 }
 
 /* =====================
@@ -210,6 +217,11 @@ body {
   gap: 6px;
 
   border: 1px solid var(--stroke);
+}
+
+.project-title,
+.project-period {
+  margin-left: 5px;
 }
 
 .project-title {
