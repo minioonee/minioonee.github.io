@@ -19,6 +19,11 @@
   box-sizing: border-box;
 }
 
+/* p 태그 전역 마진 제거 */
+p {
+  margin: 0;
+}
+
 body {
   margin: 0;
   font-family: Pretendard, 'Segoe UI', sans-serif;
@@ -48,13 +53,11 @@ body {
 .name {
   font-size: 32px;
   font-weight: 700;
-  margin: 0;
 }
 
 .intro-text {
   font-size: 13px;
   color: var(--muted);
-  margin: 0;
 }
 
 .main-links {
@@ -169,19 +172,16 @@ body {
 .background-title {
   font-size: 16px;
   font-weight: 600;
-  margin: 0;
 }
 
 .background-detail {
   font-size: 13px;
   color: var(--ink-soft);
-  margin: 0;
 }
 
 .background-period {
   font-size: 12px;
   color: var(--muted);
-  margin: 0;
 }
 
 .background-card.is-planned {
@@ -215,13 +215,11 @@ body {
 .project-title {
   font-size: 17px;
   font-weight: 600;
-  margin: 0;
 }
 
 .project-period {
   font-size: 12px;
   color: var(--muted);
-  margin: 0;
 }
 
 /* =====================
