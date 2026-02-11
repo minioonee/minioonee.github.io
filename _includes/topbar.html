@@ -19,12 +19,11 @@
       </span>
 
       {% elsif forloop.last %} {% if page.collection == 'tabs' %}
-      <span
-        >{{ site.data.locales[include.lang].tabs[item] | default: page.title
-        }}</span
-      >
+      <span style="font-weight: 600">
+        {{ site.data.locales[include.lang].tabs[item] | default: page.title }}
+      </span>
       {% else %}
-      <span>{{ page.title }}</span>
+      <span style="font-weight: 700">{{ page.title }}</span>
       {% endif %} {% elsif page.layout == 'category' or page.layout == 'tag' %}
       <span>
         <a
