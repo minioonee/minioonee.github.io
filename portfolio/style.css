@@ -26,7 +26,7 @@ p {
 
 body {
   margin: 0;
-  font-family: Pretendard, 'Segoe UI', sans-serif;
+  font-family: Pretendard, sans-serif;
   background: var(--bg);
   color: var(--ink);
   line-height: 1.6;
@@ -38,16 +38,14 @@ body {
   padding: 36px 12px 48px;
 }
 
-/* =====================
-   Main Section
-===================== */
+/* Main Section */
 .main-info {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 30px;
-  padding: 12px 0 24px;
+  padding: 50px 0 30px;
 }
 
 .name {
@@ -83,9 +81,7 @@ body {
   box-shadow: inset 0 -1px 0 var(--accent);
 }
 
-/* =====================
-   Detail Section
-===================== */
+/* Detail Section */
 .detail-section {
   padding-top: 55px;
 }
@@ -106,9 +102,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* =====================
-   Technical Skills
-===================== */
+/* Technical Skills */
 .skills-group {
   display: flex;
   flex-wrap: wrap;
@@ -135,9 +129,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-/* =====================
-   Background
-===================== */
+/* Background */
 .background-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -199,9 +191,7 @@ body {
   margin-bottom: 5px;
 }
 
-/* =====================
-   Projects
-===================== */
+/* Projects */
 .project-grid {
   display: grid;
   gap: 16px;
@@ -252,9 +242,7 @@ body {
   margin-top: 5px;
 }
 
-/* =====================
-   Badges (Glass Style)
-===================== */
+/* Badges */
 .role-group {
   display: flex;
   flex-wrap: wrap;
@@ -283,9 +271,7 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-/* =====================
-   Responsive
-===================== */
+/* Responsive */
 @media (max-width: 640px) {
   .page {
     padding: 48px 16px 72px;
