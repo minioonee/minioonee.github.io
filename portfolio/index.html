@@ -5,9 +5,14 @@
     <title>Portfolio | 영운</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
   </head>
 
   <body>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+      <i data-lucide="moon"></i>
+    </button>
+
     <div class="page">
       <main>
         <!-- Main Section -->
@@ -183,6 +188,59 @@
     </div>
 
     <script>
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+
+      const renderThemeIcon = (theme) => {
+        themeToggle.innerHTML =
+          theme === "dark"
+            ? '<i data-lucide="sun-dim"></i>'
+            : '<i data-lucide="moon"></i>';
+
+        themeToggle.setAttribute(
+          "aria-label",
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+        );
+        themeToggle.setAttribute(
+          "title",
+          theme === "dark" ? "Light mode" : "Dark mode",
+        );
+
+        lucide.createIcons();
+      };
+
+      const getStoredTheme = () => localStorage.getItem("portfolio-theme");
+
+      const getPreferredTheme = () => {
+        const storedTheme = getStoredTheme();
+
+        if (storedTheme === "light" || storedTheme === "dark") {
+          return storedTheme;
+        }
+
+        return systemPrefersDark.matches ? "dark" : "light";
+      };
+
+      const applyTheme = (theme) => {
+        root.dataset.theme = theme;
+        renderThemeIcon(theme);
+      };
+
+      applyTheme(getPreferredTheme());
+
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        localStorage.setItem("portfolio-theme", nextTheme);
+        applyTheme(nextTheme);
+      });
+
+      systemPrefersDark.addEventListener("change", (event) => {
+        if (!getStoredTheme()) {
+          applyTheme(event.matches ? "dark" : "light");
+        }
+      });
+
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
