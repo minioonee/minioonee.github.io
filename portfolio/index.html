@@ -9,7 +9,13 @@
   </head>
 
   <body>
-    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      type="button"
+      aria-label="Toggle theme"
+      title="Toggle theme"
+    >
       <i data-lucide="moon"></i>
     </button>
 
@@ -18,11 +24,13 @@
         <!-- Main Section -->
         <section class="main-info" id="top">
           <p class="name">영운</p>
-          <p class="intro-text">한 줄 소개</p>
+          <p class="intro-text">
+            개인의 생각과 경험이 온전히 전달될 수 있도록 콘텐츠와 기술을 함께
+            고민합니다.
+          </p>
 
           <div class="main-links">
-            <a href="https://github.com/minioonee">GitHub</a>
-            <a href="https://minioonee.github.io/">Blog</a>
+            <a href="https://github.com/psycheew">GitHub</a>
           </div>
         </section>
 
@@ -31,15 +39,18 @@
           <p class="detail-title">Technical Skills</p>
 
           <div class="skills-group">
-            <span class="skill-badge">Python</span>
             <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">TypeScript</span>
+            <span class="skill-badge">React</span>
+            <span class="skill-badge">Vue</span>
+            <span class="skill-badge">Python</span>
+            <span class="skill-badge">FastAPI</span>
             <span class="skill-badge">HTML</span>
             <span class="skill-badge">CSS</span>
-            <span class="skill-badge">Vue</span>
-            <span class="skill-badge">React</span>
             <span class="skill-badge">Git</span>
             <span class="skill-badge">Jira</span>
             <span class="skill-badge">Notion</span>
+            <span class="skill-badge">Figma</span>
           </div>
         </section>
 
@@ -90,22 +101,28 @@
             <article class="project-card">
               <div class="project-header">
                 <div class="project-heading">
-                  <p class="project-title">The Interview</p>
-                  <p class="project-role">AI · PM · Frontend</p>
+                  <p class="project-title">NAIS</p>
+                  <p class="project-role">Frontend · AI</p>
                 </div>
-                <p class="project-period">🏆 2026. 02 - 2026. 03</p>
+                <p class="project-period">2026. 04 - 2026. 05</p>
               </div>
 
               <p class="project-description">
-                누구나 매거진의 주인공이 되는, AI 인터뷰 플랫폼
+                단말 데이터 기반 통신 품질 예측 AI 모델의 결과를 지도 위에
+                시각화하여 품질 열세 지역과 문제 발생 지점을 직관적으로 확인할
+                수 있는 사내 대시보드 서비스
               </p>
 
               <div class="project-meta">
                 <div class="role-group stack-group">
                   <span class="badge">React</span>
-                  <span class="badge">Next.js</span>
-                  <span class="badge">Python</span>
+                  <span class="badge">Vite</span>
                   <span class="badge">JavaScript</span>
+                  <span class="badge">TypeScript</span>
+                  <span class="badge">MapLibre</span>
+                  <span class="badge">deck.gl</span>
+                  <span class="badge">Python</span>
+                  <span class="badge">FastAPI</span>
                 </div>
               </div>
             </article>
@@ -113,15 +130,43 @@
             <article class="project-card">
               <div class="project-header">
                 <div class="project-heading">
-                  <p class="project-title">pammap</p>
+                  <p class="project-title">The Interview</p>
+                  <p class="project-role">AI · PM · Frontend</p>
+                </div>
+                <p class="project-period">🏆 2026. 02 - 2026. 03</p>
+              </div>
+
+              <p class="project-description">
+                "당신의 목소리, 한 줄의 매거진이 되다." AI를 통해 대화 맥락 기반
+                실시간 음성 인터뷰를 진행하고, 사용자의 답변을 매거진 형태의
+                글로 재구성하여 기록의 진입 장벽을 낮춘 자기 탐색형 인터뷰
+                플랫폼
+              </p>
+
+              <div class="project-meta">
+                <div class="role-group stack-group">
+                  <span class="badge">Python</span>
+                  <span class="badge">FastAPI</span>
+                  <span class="badge">React</span>
+                  <span class="badge">Next.js</span>
+                  <span class="badge">JavaScript</span>
+                  <span class="badge">TypeScript</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-header">
+                <div class="project-heading">
+                  <p class="project-title">PammaP</p>
                   <p class="project-role">PM · Frontend</p>
                 </div>
                 <p class="project-period">2026. 01 - 2026. 02</p>
               </div>
 
               <p class="project-description">
-                종이 팜플릿을 디지털화하여 축제 정보를 실시간으로 제공하는 안내
-                서비스
+                종이 팜플릿에 분산되어 있던 축제 정보를 모바일 지도 기반으로
+                제공하는 웹 서비스
               </p>
 
               <div class="project-meta">
@@ -190,7 +235,9 @@
     <script>
       const root = document.documentElement;
       const themeToggle = document.getElementById("theme-toggle");
-      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      );
 
       const renderThemeIcon = (theme) => {
         themeToggle.innerHTML =
@@ -200,11 +247,11 @@
 
         themeToggle.setAttribute(
           "aria-label",
-          theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+          theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
         );
         themeToggle.setAttribute(
           "title",
-          theme === "dark" ? "Light mode" : "Dark mode",
+          theme === "dark" ? "Light mode" : "Dark mode"
         );
 
         lucide.createIcons();
