@@ -15,6 +15,9 @@ _site
 node_modules
 package-lock.json
 
+# Next.js build cache
+.next
+
 # IDE configurations
 .idea
 .vscode/*
