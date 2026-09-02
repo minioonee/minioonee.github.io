@@ -53,7 +53,7 @@ export default function Sidebar() {
       {/* 하단 아이콘 */}
       <div className="flex gap-4 text-gray-500">
         <a
-          href="https://github.com/minioonee"
+          href="https://github.com/psycheew"
           target="_blank"
           className="hover:text-black transition-colors"
         >
