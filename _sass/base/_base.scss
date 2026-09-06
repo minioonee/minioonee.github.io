@@ -130,13 +130,10 @@ main {
 }
 
 .content {
-  font-size: 1.08rem;
+  // Keep reading text compact on phones and scale it gently for larger screens.
+  font-size: clamp(0.95rem, calc(0.925rem + 0.125vw), 1rem);
   margin-top: 2rem;
   overflow-wrap: break-word;
-
-  @include bp.xl {
-    font-size: 1.03rem;
-  }
 
   a {
     &.popup {

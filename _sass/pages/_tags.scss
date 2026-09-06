@@ -1,4 +1,5 @@
 @use '../abstracts/breakpoints' as bp;
+@use '../abstracts/variables' as v;
 
 .tag {
   border-radius: 0.7em;
@@ -12,7 +13,7 @@
   span {
     margin-left: 0.6em;
     font-size: 0.7em;
-    font-family: Oswald, sans-serif;
+    font-family: v.$font-family-base;
   }
 }
 
