@@ -5,10 +5,10 @@ permalink: /posts/radix-select-error/
 categories:
   - "\U0001D5EA\U0001D5F5\U0001D5EE\U0001D601 \U0001D5DC \U0001D5DF\U0001D5F2\U0001D5EE\U0001D5FF\U0001D5FB\U0001D5F2\U0001D5F1"
 tags:
-  - React
   - Radix UI
+  - React
 notion_id: 3cf0b704-6937-80e5-964a-ceeceef21816
-notion_last_edited: '2026-09-06T19:28:00.000Z'
+notion_last_edited: '2026-09-06T20:27:00.000Z'
 notion_asset_dir: assets/img/posts/radix-select-error
 notion_sync_version: 4
 ---
