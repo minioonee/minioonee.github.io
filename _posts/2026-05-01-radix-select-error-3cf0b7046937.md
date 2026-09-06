@@ -8,9 +8,9 @@ tags:
   - React
   - Radix UI
 notion_id: 3cf0b704-6937-80e5-964a-ceeceef21816
-notion_last_edited: '2026-09-06T17:43:00.000Z'
+notion_last_edited: '2026-09-06T17:58:00.000Z'
 notion_asset_dir: assets/img/posts/radix-select-error-3cf0b7046937
-notion_sync_version: 2
+notion_sync_version: 3
 ---
 
 # 🌱 Context
@@ -38,7 +38,7 @@ const options = apiOptions.length
 ## 🚨 Problem
 
 
-```plain text
+```plaintext
 A <Select.Item /> must have a value prop that is not an empty string.
 
 This is because the Select value can be set to an empty string to clear the selection and show the placeholder.
