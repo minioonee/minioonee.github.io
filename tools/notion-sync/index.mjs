@@ -67,6 +67,48 @@ function extensionOf(url) {
   return /^\.[a-z0-9]{1,5}$/.test(extension) ? extension : '.img';
 }
 
+function normalizeCodeLanguage(language) {
+  const normalized = (language || 'plaintext').trim().toLowerCase();
+  const aliases = {
+    'plain text': 'plaintext',
+    'c++': 'cpp',
+    'c#': 'csharp',
+    'f#': 'fsharp',
+    'visual basic': 'vb',
+  };
+  return aliases[normalized]
+    || normalized.replace(/\s+/g, '-').replace(/[^a-z0-9_+.#-]/g, '')
+    || 'plaintext';
+}
+
+function codeBlockMarkdown(block) {
+  const code = textValue(block.code, 'rich_text');
+  if (!code) return '';
+  const longestBackticks = Math.max(
+    0,
+    ...(code.match(/`+/g) || []).map((run) => run.length),
+  );
+  const fence = '`'.repeat(Math.max(3, longestBackticks + 1));
+  return `${fence}${normalizeCodeLanguage(block.code.language)}\n${code.replace(/\n+$/, '')}\n${fence}`;
+}
+
+function validateCodeFences(markdown) {
+  let opening = null;
+  for (const [index, line] of markdown.split('\n').entries()) {
+    const match = line.match(/^(`{3,})([^`]*)$/);
+    if (!match) continue;
+    if (!opening) {
+      if (/\s/.test(match[2].trim())) {
+        throw new Error(`code fence on line ${index + 1} has an invalid language identifier`);
+      }
+      opening = { length: match[1].length, line: index + 1 };
+    } else if (!match[2].trim() && match[1].length >= opening.length) {
+      opening = null;
+    }
+  }
+  if (opening) throw new Error(`code fence opened on line ${opening.line} is not closed`);
+}
+
 function download(url, destination, redirects = 0) {
   return new Promise((resolve, reject) => {
     if (redirects > 5) return reject(new Error('too many redirects'));
@@ -197,7 +239,10 @@ async function markdownFor(page, publicAssets, temporaryAssets) {
       .replace(/[\r\n]/g, ' ');
     return `![${caption}](/${path.posix.join(publicAssets, filename)})`;
   });
-  return n2m.toMarkdownString(await n2m.pageToMarkdown(page.id)).parent;
+  n2m.setCustomTransformer('code', codeBlockMarkdown);
+  const markdown = n2m.toMarkdownString(await n2m.pageToMarkdown(page.id)).parent;
+  validateCodeFences(markdown);
+  return markdown;
 }
 
 async function prepare(page) {
@@ -228,7 +273,7 @@ async function prepare(page) {
       notion_id: page.id,
       notion_last_edited: page.last_edited_time,
       notion_asset_dir: publicAssets,
-      notion_sync_version: 2,
+      notion_sync_version: 3,
     };
     if (cover) frontmatter.image = cover;
     const filename = `${formattedDate(dateOf(page)).slice(0, 10)}-${slug}-${key}.md`;
@@ -321,7 +366,7 @@ async function main() {
       const previous = posts.find((post) => post.data.notion_id === page.id);
       const previousAssets = previous ? assetDirectory(previous) : null;
       if (
-        previous?.data.notion_sync_version === 2
+        previous?.data.notion_sync_version === 3
         && previous.data.notion_last_edited === page.last_edited_time
         && previousAssets
         && fs.existsSync(previousAssets)
