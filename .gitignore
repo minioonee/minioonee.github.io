@@ -28,3 +28,6 @@ package-lock.json
 # Misc
 _sass/vendors
 assets/js/dist
+
+# Notion sync
+.notion-sync-changed
