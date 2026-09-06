@@ -29,7 +29,6 @@ const dateOf = (page) => page.properties.Date?.date?.start || null;
 const statusOf = (page) => page.properties.Status?.select?.name || null;
 const categoryOf = (page) => page.properties.Category?.select?.name || null;
 const tagsOf = (page) => page.properties.Tags?.multi_select?.map((item) => item.name) || [];
-const keyOf = (id) => id.replaceAll('-', '').slice(0, 12).toLowerCase();
 
 function slugify(value) {
   return value
@@ -200,12 +199,35 @@ function validate(pages, posts) {
     if (slug && slugs.has(slug) && slugs.get(slug) !== page.id) errors.push(`Slug "${slug}" is used by multiple published pages`);
     slugs.set(slug, page.id);
     if (slug) {
-      const targetAssets = path.join(IMAGES, `${slug}-${keyOf(page.id)}`);
+      const permalink = `/posts/${slug}/`;
+      const conflictingSlugPost = posts.find(
+        (post) => post.data.notion_id !== page.id && post.data.permalink === permalink,
+      );
+      if (conflictingSlugPost) {
+        errors.push(`${label}: Slug "${slug}" is already used by notion_id ${conflictingSlugPost.data.notion_id}`);
+      }
+
+      const targetAssets = path.join(IMAGES, slug);
       const conflictingPost = posts.find(
         (post) => post.data.notion_id !== page.id && assetDirectory(post) === targetAssets,
       );
       if (conflictingPost) {
         errors.push(`${label}: image path is owned by notion_id ${conflictingPost.data.notion_id}`);
+      } else if (
+        fs.existsSync(targetAssets)
+        && !posts.some((post) => post.data.notion_id === page.id && assetDirectory(post) === targetAssets)
+      ) {
+        errors.push(`${label}: image path already exists without matching notion_id ownership`);
+      }
+
+      if (dateOf(page)) {
+        const targetMarkdown = path.join(POSTS, `${formattedDate(dateOf(page)).slice(0, 10)}-${slug}.md`);
+        if (fs.existsSync(targetMarkdown)) {
+          const owner = matter(fs.readFileSync(targetMarkdown, 'utf8')).data.notion_id;
+          if (owner !== page.id) {
+            errors.push(`${label}: Markdown path is owned by notion_id ${owner || '<none>'}`);
+          }
+        }
       }
     }
   }
@@ -247,10 +269,9 @@ async function markdownFor(page, publicAssets, temporaryAssets) {
 
 async function prepare(page) {
   const slug = slugOf(page);
-  const key = keyOf(page.id);
-  const assetName = `${slug}-${key}`;
+  const assetName = slug;
   const publicAssets = path.posix.join('assets', 'img', 'posts', assetName);
-  const temporaryDirectory = fs.mkdtempSync(path.join(TEMP, `${key}-`));
+  const temporaryDirectory = fs.mkdtempSync(path.join(TEMP, 'page-'));
   const temporaryAssets = path.join(temporaryDirectory, 'assets');
   fs.mkdirSync(temporaryAssets, { recursive: true });
   try {
@@ -273,10 +294,10 @@ async function prepare(page) {
       notion_id: page.id,
       notion_last_edited: page.last_edited_time,
       notion_asset_dir: publicAssets,
-      notion_sync_version: 3,
+      notion_sync_version: 4,
     };
     if (cover) frontmatter.image = cover;
-    const filename = `${formattedDate(dateOf(page)).slice(0, 10)}-${slug}-${key}.md`;
+    const filename = `${formattedDate(dateOf(page)).slice(0, 10)}-${slug}.md`;
     const temporaryMarkdown = path.join(temporaryDirectory, filename);
     fs.writeFileSync(temporaryMarkdown, matter.stringify(body, frontmatter), 'utf8');
     return {
@@ -366,7 +387,7 @@ async function main() {
       const previous = posts.find((post) => post.data.notion_id === page.id);
       const previousAssets = previous ? assetDirectory(previous) : null;
       if (
-        previous?.data.notion_sync_version === 3
+        previous?.data.notion_sync_version === 4
         && previous.data.notion_last_edited === page.last_edited_time
         && previousAssets
         && fs.existsSync(previousAssets)
