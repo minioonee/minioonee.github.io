@@ -3,17 +3,17 @@ title: Radix Select에서 빈 문자열 value 처리로 인해 발생한 에러 
 date: '2026-05-01 00:00:00 +0900'
 permalink: /posts/radix-select-error/
 categories:
-  - Troubleshooting
+  - "\U0001D5EA\U0001D5F5\U0001D5EE\U0001D601 \U0001D5DC \U0001D5DF\U0001D5F2\U0001D5EE\U0001D5FF\U0001D5FB\U0001D5F2\U0001D5F1"
 tags:
   - React
   - Radix UI
 notion_id: 3cf0b704-6937-80e5-964a-ceeceef21816
-notion_last_edited: '2026-09-06T17:58:00.000Z'
-notion_asset_dir: assets/img/posts/radix-select-error-3cf0b7046937
-notion_sync_version: 3
+notion_last_edited: '2026-09-06T19:28:00.000Z'
+notion_asset_dir: assets/img/posts/radix-select-error
+notion_sync_version: 4
 ---
 
-# 🌱 Context
+## 🌱 Context
 
 
 초기 개발 단계에서 화면 구현과 동작 검증을 위해 Select 옵션을 하드코딩 하여 사용하였고, 이때는 문제가 없었습니다.
@@ -88,6 +88,9 @@ const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined
 ```
 
 
+<br>
+
+
 **2. Placeholder는 옵션이 아니라** **`SelectValue`****의 속성으로 처리**
 
 
@@ -105,6 +108,9 @@ const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined
   </SelectContent>
 </Select>
 ```
+
+
+<br>
 
 
 **3. 로딩 상태도 fallback 옵션 없이 처리**
@@ -133,6 +139,9 @@ const [selectedValue, setSelectedValue] = useState<string | undefined>(undefined
 `disabled` 조건은 "선택 값의 존재 여부"가 아니라 "로딩 상태 + 옵션 존재 여부"에만 연결했습니다. 그렇지 않으면 선택값이 없다는 이유로 Select가 영구적으로 비활성화될 수 있습니다.
 
 
+<br>
+
+
 **4. 로딩 상태 해제는** **`finally`****에서 처리**
 
 
@@ -146,6 +155,9 @@ try {
   setIsLoading(false)
 }
 ```
+
+
+<br>
 
 
 **5. API 응답 정규화로 방어 로직 추가**
@@ -167,13 +179,16 @@ const normalizedOptions = apiOptions
 ## ✅ Result
 
 
-`SelectItem`에 빈 문자열 value가 전달될 여지를 구조적으로 없앰으로써 Radix Select의 value 에러를 해결했습니다. placeholder, 로딩 상태, 실제 선택 가능한 옵션이라는 세 가지 개념을 명확히 분리하니 Select 컴포넌트의 동작이 훨씬 안정적으로 예측 가능해졌습니다. 사용자는 로딩이 끝난 뒤 옵션을 정상적으로 선택할 수 있게 되었고, 필터 UI의 사용성도 함께 개선되었습니다.
+`SelectItem`에 빈 문자열 value가 전달될 여지를 구조적으로 없앰으로써 Radix Select의 value 에러를 해결했습니다. 
+
+
+placeholder, 로딩 상태, 실제 선택 가능한 옵션이라는 세 가지 개념을 명확히 분리하니 Select 컴포넌트의 동작이 훨씬 안정적으로 예측 가능해졌습니다. 사용자는 로딩이 끝난 뒤 옵션을 정상적으로 선택할 수 있게 되었고, 필터 UI의 사용성도 함께 개선되었습니다.
 
 
 <br>
 
 
-## 💡 Takeaways
+## 💡 What I Learned
 
 - Radix Select에서 `value=""`는 일반 옵션이 아니라 **선택 해제 및 placeholder 표시를 위한 예약 값**이다. 실제 옵션의 value로 사용해서는 안 된다.
 - placeholder, loading, empty 같은 "옵션이 아닌 상태"를 가짜 옵션으로 흉내 내려는 유혹을 조심해야 한다. 대신 `disabled`, `SelectValue placeholder`, `undefined` state 같은 컴포넌트 본연의 API를 활용하는 편이 훨씬 안전하다.
