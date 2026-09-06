@@ -135,6 +135,11 @@ main {
   margin-top: 2rem;
   overflow-wrap: break-word;
 
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+
   a {
     &.popup {
       @extend %no-cursor;
